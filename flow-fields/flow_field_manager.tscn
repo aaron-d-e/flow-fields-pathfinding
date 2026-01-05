@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcosrldgnxd8u"]
+
+[ext_resource type="Script" uid="uid://k2t5dbebqf88" path="res://flow_field_manager.gd" id="1_f5sxi"]
+
+[node name="FlowFieldManager" type="Node2D"]
+script = ExtResource("1_f5sxi")
+field_size = Vector2(32, 16)
+cell_size = Vector2(16, 16)
