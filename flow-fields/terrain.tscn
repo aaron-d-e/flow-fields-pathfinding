@@ -730,12 +730,13 @@ position = Vector2(8, 8)
 [node name="FlowFieldManager" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_n7k1k")]
 unique_name_in_owner = true
 field_size = Vector2i(32, 16)
-cell_size = Vector2i(16, 16)
+cell_size = Vector2i(32, 32)
 target = NodePath("../CharacterBody2D")
 debug_font = SubResource("FontFile_n7k1k")
 debug_font_size = 10
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(504, 248)
 texture = ExtResource("5_iqhxt")
 script = ExtResource("6_e1kr5")

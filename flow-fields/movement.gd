@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const tile_size := Vector2(16,16)
+@onready var tile_size :Vector2 = $%FlowFieldManager.cell_size
 var sprite_node_pos_tween: Tween
 
 func _physics_process(_delta: float) -> void:

@@ -58,7 +58,7 @@ func _draw() -> void:
 		if cost != MAX_COST:
 			var world_pos := cell_to_world(cell)
 			var dir := field_directions[cell]
-			# draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
+			draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
 			draw_line(world_pos, world_pos + Vector2(dir.x * 8, dir.y * 8) , Color.BLUE)
 			
 	
