@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=9 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Terrain/Tileset/Tilemap_color1.png" id="1_206su"]
 [ext_resource type="PackedScene" uid="uid://ipfpht1txr7b" path="res://movement_test.tscn" id="2_0u6kl"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://tile.png" id="2_avahw"]
+[ext_resource type="PackedScene" uid="uid://dcosrldgnxd8u" path="res://flow_field_manager.tscn" id="4_n7k1k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
 texture = ExtResource("1_206su")
@@ -708,6 +709,13 @@ texture = ExtResource("2_avahw")
 sources/0 = SubResource("TileSetAtlasSource_0u6kl")
 sources/1 = SubResource("TileSetAtlasSource_n7k1k")
 
+[sub_resource type="FontFile" id="FontFile_n7k1k"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -716,3 +724,10 @@ tile_set = SubResource("TileSet_avahw")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_0u6kl")]
 position = Vector2(8, 8)
+
+[node name="FlowFieldManager" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_n7k1k")]
+field_size = Vector2i(32, 16)
+cell_size = Vector2i(16, 16)
+target = NodePath("../CharacterBody2D")
+debug_font = SubResource("FontFile_n7k1k")
+debug_font_size = 10
