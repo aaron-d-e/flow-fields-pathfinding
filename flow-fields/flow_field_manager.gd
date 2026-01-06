@@ -53,7 +53,9 @@ func _draw() -> void:
 		var cost := field_costs[cell]
 		if cost != MAX_COST:
 			var world_pos := cell_to_world(cell)
-			draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
+			var dir := field_directions[cell]
+			# draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
+			draw_line(world_pos, world_pos + Vector2(dir.x * 8, dir.y * 8) , Color.BLUE)
 			
 	
 func generate_flow_field() -> void:
@@ -66,12 +68,10 @@ func generate_flow_field() -> void:
 	cost_queue.append(target_cell)
 	field_costs[target_cell] = 0 # target to itself will always be zero
 	
-	# var seen: Array[Vector2i] = []
 	
 	while not cost_queue.is_empty():
 		var current_node: Vector2i = cost_queue.pop_front()
 		var current_cost := field_costs[current_node]
-		# seen.append(current_node)
 		
 		var neighbors: Array[Vector2i] = get_neighbors(current_node) # checks for bounds in function, neighbors should be valid
 		for node in neighbors:
@@ -79,8 +79,17 @@ func generate_flow_field() -> void:
 			if new_cost < field_costs[node]:
 				field_costs[node] = new_cost
 				cost_queue.append(node) # add unseen neighbors to the frontier
+				
+	for cell in cell_array:
+		var best_cost = field_costs[cell] # best cost is always to itself
+		var best_dir = Vector2i.ZERO # best dir is to stay still
+		for dir in directions:
+			var neighbor: Vector2i = dir + cell
+			if cell_array.has(neighbor) and field_costs[neighbor] < best_cost:
+				best_cost = field_costs[neighbor]
+				best_dir = dir
+		field_directions[cell] = best_dir
 	
-	print(field_costs)
 	
 func get_target_cell() -> Vector2i:
 	return Vector2i(
