@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=11 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Terrain/Tileset/Tilemap_color1.png" id="1_206su"]
 [ext_resource type="PackedScene" uid="uid://ipfpht1txr7b" path="res://movement_test.tscn" id="2_0u6kl"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://tile.png" id="2_avahw"]
 [ext_resource type="PackedScene" uid="uid://dcosrldgnxd8u" path="res://flow_field_manager.tscn" id="4_n7k1k"]
+[ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Sprite-0001.png" id="5_iqhxt"]
+[ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://enemy_sprite.gd" id="6_e1kr5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
 texture = ExtResource("1_206su")
@@ -723,11 +725,17 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAA
 tile_set = SubResource("TileSet_avahw")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_0u6kl")]
-position = Vector2(248, 120)
+position = Vector2(8, 8)
 
 [node name="FlowFieldManager" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_n7k1k")]
+unique_name_in_owner = true
 field_size = Vector2i(32, 16)
 cell_size = Vector2i(16, 16)
 target = NodePath("../CharacterBody2D")
 debug_font = SubResource("FontFile_n7k1k")
 debug_font_size = 10
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(504, 248)
+texture = ExtResource("5_iqhxt")
+script = ExtResource("6_e1kr5")

@@ -80,11 +80,16 @@ func generate_flow_field() -> void:
 		var neighbors: Array[Vector2i] = get_neighbors(current_node) # checks for bounds in function, neighbors should be valid
 		for node in neighbors:
 			var new_cost := current_cost + 1
+			
+			var dir := node - current_node
+			if dir.x != 0 and dir.y != 0:
+				new_cost += 1
+				
 			if new_cost < field_costs[node]:
 				field_costs[node] = new_cost
-				cost_queue.append(node) # add unseen neighbors to the frontier
+				cost_queue.append(node) # add unseen neighbors to the frontiers
 				
-	for cell in cell_array:
+	for cell in cell_array: 
 		var best_cost = field_costs[cell] # best cost is always to itself
 		var best_dir = Vector2i.ZERO # best dir is to stay still
 		for dir in directions:
@@ -93,6 +98,7 @@ func generate_flow_field() -> void:
 				best_cost = field_costs[neighbor]
 				best_dir = dir
 		field_directions[cell] = best_dir
+
 	
 	
 func get_target_cell() -> Vector2i:
