@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ipfpht1txr7b" path="res://movement_test.tscn" id="2_0u6kl"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://tile.png" id="2_avahw"]
 [ext_resource type="PackedScene" uid="uid://dcosrldgnxd8u" path="res://flow_field_manager.tscn" id="4_n7k1k"]
-[ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Sprite-0001.png" id="5_iqhxt"]
+[ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://enemy_red.png" id="5_iqhxt"]
 [ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://enemy_sprite.gd" id="6_e1kr5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
