@@ -14,7 +14,11 @@ var directions: Array[Vector2i] = [
 	Vector2i.UP,
 	Vector2i.DOWN,
 	Vector2i.LEFT,
-	Vector2i.RIGHT
+	Vector2i.RIGHT,
+	Vector2i.ONE, 
+	Vector2i(1,-1),
+	Vector2i(-1,1),
+	Vector2i(-1,-1),
 ]
 
 var cell_array: Array[Vector2i] = []# array of every cell as a vector2
