@@ -20,6 +20,7 @@ var directions: Array[Vector2i] = [
 	Vector2i(-1,1),
 	Vector2i(-1,-1),
 ]
+var sprites: Array[Sprite2D]
 
 var cell_array: Array[Vector2i] = []# array of every cell as a vector2
 var field_directions: Dictionary[Vector2i, Vector2i] = {} # directions of each cell in grid
@@ -58,7 +59,7 @@ func _draw() -> void:
 		if cost != MAX_COST:
 			var world_pos := cell_to_world(cell)
 			var dir := field_directions[cell]
-			draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
+			# draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
 			draw_line(world_pos, world_pos + Vector2(dir.x * 8, dir.y * 8) , Color.BLUE)
 			
 	
@@ -80,14 +81,16 @@ func generate_flow_field() -> void:
 		var neighbors: Array[Vector2i] = get_neighbors(current_node) # checks for bounds in function, neighbors should be valid
 		for node in neighbors:
 			var new_cost := current_cost + 1
-			
-			var dir := node - current_node
-			if dir.x != 0 and dir.y != 0:
+
+			var angle = Vector2(target_cell).angle_to_point(Vector2(node))
+			if abs(angle - snappedf(angle, PI / 2)) > PI / 12:
 				new_cost += 1
-				
+			
 			if new_cost < field_costs[node]:
 				field_costs[node] = new_cost
 				cost_queue.append(node) # add unseen neighbors to the frontiers
+				
+			
 				
 	for cell in cell_array: 
 		var best_cost = field_costs[cell] # best cost is always to itself
