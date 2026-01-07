@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=14 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Terrain/Tileset/Tilemap_color1.png" id="1_206su"]
 [ext_resource type="PackedScene" uid="uid://ipfpht1txr7b" path="res://movement_test.tscn" id="2_0u6kl"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dcosrldgnxd8u" path="res://flow_field_manager.tscn" id="4_n7k1k"]
 [ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Assets/16x16_red.png" id="5_iqhxt"]
 [ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://enemy_sprite.gd" id="6_e1kr5"]
+[ext_resource type="PackedScene" uid="uid://dtpu4r35arbhq" path="res://arrow.tscn" id="6_h2lqh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
 texture = ExtResource("1_206su")
@@ -741,6 +742,7 @@ unique_name_in_owner = true
 field_size = Vector2i(32, 16)
 cell_size = Vector2i(32, 32)
 target = NodePath("../CharacterBody2D")
+arrow_scene = ExtResource("6_h2lqh")
 debug_font = SubResource("FontFile_n7k1k")
 debug_font_size = 10
 

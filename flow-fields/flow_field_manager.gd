@@ -4,6 +4,9 @@ class_name FlowFieldManager extends Node2D
 @export var cell_size: Vector2i # how big each cell is
 @export var target: CharacterBody2D
 
+@export var arrow_scene: PackedScene
+var arrows: Dictionary[Vector2i, Node2D] = {}
+
 # debug print stuff
 @export var debug_font: FontFile
 @export var debug_font_size: int = 12
@@ -20,7 +23,7 @@ var directions: Array[Vector2i] = [
 	Vector2i(-1,1),
 	Vector2i(-1,-1),
 ]
-var sprites: Array[Sprite2D]
+
 
 var cell_array: Array[Vector2i] = []# array of every cell as a vector2
 var field_directions: Dictionary[Vector2i, Vector2i] = {} # directions of each cell in grid
@@ -41,27 +44,31 @@ func _ready() -> void:
 		field_directions[vec] = Vector2i.ZERO
 	
 	generate_flow_field()
-				
-func cell_to_world(cell: Vector2i) -> Vector2:
-	return Vector2(
-		cell.x * cell_size.x + cell_size.x * 0.5,
-		cell.y * cell_size.y + cell_size.y * 0.5
-	)
+	create_debug_arrows()
+	
+func create_debug_arrows() -> void:
+	for cell in cell_array:
+		var arrow := arrow_scene.instantiate() as Node2D
+		add_child(arrow)
+		
+		arrow.position = Vector2(cell) * Vector2(cell_size) + Vector2.ONE * Vector2(cell_size) * 0.5 
+		arrows[cell] = arrow
+		
+func update_debug_arrows() -> void:
+	for key in arrows:
+		var dir := field_directions[key]
+		if dir == Vector2i.ZERO: arrows[key].visible = false
+		else:
+			arrows[key].visible = true
+			arrows[key].rotation = Vector2(dir).angle() + PI / 2
+		
 	
 func _physics_process(_delta: float) -> void:
 	if last_target_position != get_target_cell():
 		generate_flow_field() # if target moves update field again
-		queue_redraw()
-
-func _draw() -> void:
-	for cell in cell_array:
-		var cost := field_costs[cell]
-		if cost != MAX_COST:
-			var world_pos := cell_to_world(cell)
-			var dir := field_directions[cell]
-			# draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
-			draw_line(world_pos, world_pos + Vector2(dir.x * 8, dir.y * 8) , Color.BLUE)
-			
+		update_debug_arrows()
+		
+		# queue_redraw()
 	
 func generate_flow_field() -> void:
 	cost_queue.clear() # need to this call every frame
@@ -102,7 +109,20 @@ func generate_flow_field() -> void:
 				best_dir = dir
 		field_directions[cell] = best_dir
 
-	
+#func _draw() -> void:
+	#for cell in cell_array:
+		#var cost := field_costs[cell]
+		#if cost != MAX_COST:
+			#var world_pos := cell_to_world(cell)
+			#var dir := field_directions[cell]
+			# draw_string(debug_font, world_pos + Vector2(-4, 4), str(cost), HORIZONTAL_ALIGNMENT_CENTER, -1, debug_font_size, Color.BLUE)
+			#draw_line(world_pos, world_pos + Vector2(dir.x * 8, dir.y * 8) , Color.BLUE)
+
+func cell_to_world(cell: Vector2i) -> Vector2:
+	return Vector2(
+		cell.x * cell_size.x + cell_size.x * 0.5,
+		cell.y * cell_size.y + cell_size.y * 0.5
+	)
 	
 func get_target_cell() -> Vector2i:
 	return Vector2i(
