@@ -747,7 +747,6 @@ debug_font = SubResource("FontFile_n7k1k")
 debug_font_size = 10
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(1008, 496)
 texture = ExtResource("5_iqhxt")
 script = ExtResource("6_e1kr5")

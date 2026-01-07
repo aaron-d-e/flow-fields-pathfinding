@@ -11,8 +11,6 @@ var arrows: Dictionary[Vector2i, Node2D] = {}
 @export var debug_font: FontFile
 @export var debug_font_size: int = 12
 
-var last_target_position: Vector2i
-
 var directions: Array[Vector2i] = [
 	Vector2i.UP,
 	Vector2i.DOWN,
@@ -24,7 +22,6 @@ var directions: Array[Vector2i] = [
 	Vector2i(-1,-1),
 ]
 
-
 var cell_array: Array[Vector2i] = []# array of every cell as a vector2
 var field_directions: Dictionary[Vector2i, Vector2i] = {} # directions of each cell in grid
 var field_costs: Dictionary[Vector2i, int] = {} # cost of every cell in grid
@@ -33,6 +30,7 @@ var cost_queue: Array[Vector2i] = []
 
 const MAX_COST: int = 999999
 
+var last_target_position: Vector2i
 
 func _ready() -> void:
 	for x in range(field_size.x):
@@ -45,6 +43,7 @@ func _ready() -> void:
 	
 	generate_flow_field()
 	create_debug_arrows()
+	update_debug_arrows()
 	
 func create_debug_arrows() -> void:
 	for cell in cell_array:
