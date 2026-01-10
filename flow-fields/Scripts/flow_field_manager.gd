@@ -38,8 +38,8 @@ func _ready() -> void:
 		field_costs[vec] = MAX_COST
 		field_directions[vec] = Vector2i.ZERO
 	
-	generate_flow_field()
 	create_debug_arrows()
+	generate_flow_field()
 	update_debug_arrows()
 	
 	SignalBus.insert_obstacle.connect(func(pos: Vector2):
@@ -71,7 +71,7 @@ func _physics_process(_delta: float) -> void:
 		# queue_redraw()
 	
 func generate_flow_field() -> void:
-	print(obstacles)
+	# print(obstacles)
 	cost_queue.clear() # need to this call every frame
 	for cell in cell_array:
 		field_costs[cell] = MAX_COST
