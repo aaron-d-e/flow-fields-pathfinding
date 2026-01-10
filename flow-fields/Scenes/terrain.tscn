@@ -754,3 +754,15 @@ script = ExtResource("8_sehdd")
 
 [node name="Wall" parent="." instance=ExtResource("9_4glq7")]
 position = Vector2(464, 400)
+
+[node name="Node2D" parent="." instance=ExtResource("9_4glq7")]
+position = Vector2(464, 432)
+
+[node name="Node2D2" parent="." instance=ExtResource("9_4glq7")]
+position = Vector2(464, 496)
+
+[node name="Node2D3" parent="." instance=ExtResource("9_4glq7")]
+position = Vector2(464, 464)
+
+[node name="Node2D4" parent="." instance=ExtResource("9_4glq7")]
+position = Vector2(464, 368)

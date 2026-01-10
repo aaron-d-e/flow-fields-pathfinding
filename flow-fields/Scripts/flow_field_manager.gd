@@ -3,7 +3,6 @@ class_name FlowFieldManager extends Node2D
 @export var field_size: Vector2i # how many cells the grid is made of
 @export var cell_size: Vector2i # how big each cell is
 @export var target: CharacterBody2D
-
 @export var arrow_scene: PackedScene
 var arrows: Dictionary[Vector2i, Node2D] = {}
 
@@ -21,16 +20,14 @@ var directions: Array[Vector2i] = [
 	Vector2i(-1,1),
 	Vector2i(-1,-1),
 ]
-
 var cell_array: Array[Vector2i] = []# array of every cell as a vector2
 var field_directions: Dictionary[Vector2i, Vector2i] = {} # directions of each cell in grid
 var field_costs: Dictionary[Vector2i, int] = {} # cost of every cell in grid
-
 var cost_queue: Array[Vector2i] = []
+var last_target_position: Vector2i
+var obstacles: Array[Vector2i] = [] # obstacles as cell positions
 
 const MAX_COST: int = 999999
-
-var last_target_position: Vector2i
 
 func _ready() -> void:
 	for x in range(field_size.x):
@@ -44,6 +41,10 @@ func _ready() -> void:
 	generate_flow_field()
 	create_debug_arrows()
 	update_debug_arrows()
+	
+	SignalBus.insert_obstacle.connect(func(pos: Vector2):
+		obstacles.append(world_to_cell(pos))
+	)
 	
 func create_debug_arrows() -> void:
 	for cell in cell_array:
@@ -70,6 +71,7 @@ func _physics_process(_delta: float) -> void:
 		# queue_redraw()
 	
 func generate_flow_field() -> void:
+	print(obstacles)
 	cost_queue.clear() # need to this call every frame
 	for cell in cell_array:
 		field_costs[cell] = MAX_COST
@@ -92,11 +94,10 @@ func generate_flow_field() -> void:
 			if abs(angle - snappedf(angle, PI / 2)) > PI / 12:
 				new_cost += 1
 			
-			if new_cost < field_costs[node]:
+			if new_cost < field_costs[node] and !obstacles.has(node):
 				field_costs[node] = new_cost
 				cost_queue.append(node) # add unseen neighbors to the frontiers
 				
-			
 				
 	for cell in cell_array: 
 		var best_cost = field_costs[cell] # best cost is always to itself
@@ -121,6 +122,12 @@ func cell_to_world(cell: Vector2i) -> Vector2:
 	return Vector2(
 		cell.x * cell_size.x + cell_size.x * 0.5,
 		cell.y * cell_size.y + cell_size.y * 0.5
+	)
+
+func world_to_cell(vec: Vector2) -> Vector2i:
+	return Vector2i(
+		floor(vec.x / cell_size.x),
+		floor(vec.y / cell_size.y)
 	)
 	
 func get_target_cell() -> Vector2i:
