@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7rvdsq4jaxup"]
+
+[ext_resource type="Texture2D" uid="uid://oj3u3ktwmg3x" path="res://Assets/wall-tile.png" id="1_xxgf6"]
+[ext_resource type="Script" uid="uid://cvynnvy7r5tgc" path="res://Scripts/wall.gd" id="1_y4f30"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y4f30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iuee5"]
+size = Vector2(32, 32)
+
+[node name="Wall" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_y4f30")
+script = ExtResource("1_y4f30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xxgf6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iuee5")
