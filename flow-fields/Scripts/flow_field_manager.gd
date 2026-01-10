@@ -26,6 +26,7 @@ var field_costs: Dictionary[Vector2i, int] = {} # cost of every cell in grid
 var cost_queue: Array[Vector2i] = []
 var last_target_position: Vector2i
 var obstacles: Array[Vector2i] = [] # obstacles as cell positions
+var enemies: Dictionary[int, Vector2i] = {}
 
 const MAX_COST: int = 999999
 
@@ -45,6 +46,10 @@ func _ready() -> void:
 	SignalBus.insert_obstacle.connect(func(pos: Vector2):
 		obstacles.append(world_to_cell(pos))
 	)
+	SignalBus.insert_enemy.connect(func(id: int, pos: Vector2):
+		enemies[id] = world_to_cell(pos)
+	)
+	SignalBus.enemy_debug_print.connect(func(): print(enemies))
 	
 func create_debug_arrows() -> void:
 	for cell in cell_array:
@@ -94,7 +99,7 @@ func generate_flow_field() -> void:
 			if abs(angle - snappedf(angle, PI / 2)) > PI / 12:
 				new_cost += 1
 			
-			if new_cost < field_costs[node] and !obstacles.has(node):
+			if new_cost < field_costs[node] and !obstacles.has(node) and !enemies.values().has(node):
 				field_costs[node] = new_cost
 				cost_queue.append(node) # add unseen neighbors to the frontiers
 				

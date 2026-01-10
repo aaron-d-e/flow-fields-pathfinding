@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://sctpo2ewy0t1"]
+
+[ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Assets/16x16_red.png" id="1_7k104"]
+[ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://Scripts/enemy_sprite.gd" id="2_4gyqm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4gyqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(16, 16)
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_7k104")
+script = ExtResource("2_4gyqm")
+
+[node name="Node2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+shape = SubResource("RectangleShape2D_7k104")

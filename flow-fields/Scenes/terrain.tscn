@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=16 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Imports/Terrain/Tileset/Tilemap_color1.png" id="1_ph32v"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://Assets/tile.png" id="2_4glq7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Assets/16x16_red.png" id="7_o33xq"]
 [ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://Scripts/enemy_sprite.gd" id="8_sehdd"]
 [ext_resource type="PackedScene" uid="uid://c7rvdsq4jaxup" path="res://Scenes/wall.tscn" id="9_4glq7"]
+[ext_resource type="PackedScene" uid="uid://sctpo2ewy0t1" path="res://Scenes/enemy.tscn" id="10_aaxyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
 texture = ExtResource("1_ph32v")
@@ -913,3 +914,6 @@ position = Vector2(976, 208)
 
 [node name="Wall50" parent="." instance=ExtResource("9_4glq7")]
 position = Vector2(1008, 208)
+
+[node name="Sprite2D" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(1008, 16)

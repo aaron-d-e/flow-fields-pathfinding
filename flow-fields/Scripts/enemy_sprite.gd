@@ -5,14 +5,19 @@ var cell_location: Vector2i
 var enemy_tween: Tween
 var timer: float = 0.0
 
+var id: int
+
 
 func _ready() -> void:
 	cell_location = global_to_cell()
 	move_to_target()
+	id = randi()
 	
 func _physics_process(delta: float) -> void:
 	if !enemy_tween or !enemy_tween.is_running() and timer >= 1.0:
 		move_to_target()
+		SignalBus.insert_enemy.emit(id, self.global_position)
+		SignalBus.enemy_debug_print.emit()
 		timer = 0.0
 	timer += delta
 	
