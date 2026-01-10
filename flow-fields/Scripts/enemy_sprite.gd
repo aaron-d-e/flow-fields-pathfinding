@@ -29,6 +29,8 @@ func global_to_cell() -> Vector2i:
 
 func move_to_target():
 		var next_direction : Vector2i = field_manager.field_directions[cell_location]
+		var desired_pos: Vector2i = cell_location + next_direction
+		if field_manager.enemies.values().has(desired_pos): return # return if an enemy gets there first
 		self.global_position += Vector2(next_direction) * Vector2(field_manager.cell_size)
 		cell_location = global_to_cell()
 			

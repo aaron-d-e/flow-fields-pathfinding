@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=15 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Imports/Terrain/Tileset/Tilemap_color1.png" id="1_ph32v"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://Assets/tile.png" id="2_4glq7"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ipfpht1txr7b" path="res://Scenes/movement_test.tscn" id="4_gppgl"]
 [ext_resource type="PackedScene" uid="uid://dcosrldgnxd8u" path="res://Scenes/flow_field_manager.tscn" id="5_lu725"]
 [ext_resource type="PackedScene" uid="uid://dtpu4r35arbhq" path="res://Scenes/arrow.tscn" id="6_rgptw"]
-[ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Assets/16x16_red.png" id="7_o33xq"]
-[ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://Scripts/enemy_sprite.gd" id="8_sehdd"]
 [ext_resource type="PackedScene" uid="uid://c7rvdsq4jaxup" path="res://Scenes/wall.tscn" id="9_4glq7"]
+[ext_resource type="Texture2D" uid="uid://dmu0imf1ctbol" path="res://Assets/16x16_blue.png" id="9_aaxyt"]
 [ext_resource type="PackedScene" uid="uid://sctpo2ewy0t1" path="res://Scenes/enemy.tscn" id="10_aaxyt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
@@ -737,7 +736,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAAAAAEAAgAAAAEAAAABAAAAAgABAAA
 tile_set = SubResource("TileSet_avahw")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_gppgl")]
-position = Vector2(16, 16)
+position = Vector2(464, 176)
 
 [node name="FlowFieldManager" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_lu725")]
 unique_name_in_owner = true
@@ -747,11 +746,6 @@ target = NodePath("../CharacterBody2D")
 arrow_scene = ExtResource("6_rgptw")
 debug_font = SubResource("FontFile_n7k1k")
 debug_font_size = 10
-
-[node name="EnemySprite" type="Sprite2D" parent="."]
-position = Vector2(1008, 496)
-texture = ExtResource("7_o33xq")
-script = ExtResource("8_sehdd")
 
 [node name="Node2D" parent="." instance=ExtResource("9_4glq7")]
 position = Vector2(464, 431)
@@ -917,3 +911,22 @@ position = Vector2(1008, 208)
 
 [node name="Sprite2D" parent="." instance=ExtResource("10_aaxyt")]
 position = Vector2(1008, 16)
+
+[node name="Enemy" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(1008, 272)
+texture = ExtResource("9_aaxyt")
+
+[node name="Enemy2" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(656, 48)
+
+[node name="Enemy3" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(656, 368)
+
+[node name="Enemy4" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(752, 432)
+
+[node name="Enemy5" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(880, 400)
+
+[node name="Enemy7" parent="." instance=ExtResource("10_aaxyt")]
+position = Vector2(336, 401)
