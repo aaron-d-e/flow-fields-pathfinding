@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cd76kuam5almt"]
+[gd_scene load_steps=15 format=4 uid="uid://cd76kuam5almt"]
 
 [ext_resource type="Texture2D" uid="uid://1ygtwh2fnap4" path="res://Imports/Terrain/Tileset/Tilemap_color1.png" id="1_ph32v"]
 [ext_resource type="Texture2D" uid="uid://drgyxj5nyh6hp" path="res://Assets/tile.png" id="2_4glq7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dtpu4r35arbhq" path="res://Scenes/arrow.tscn" id="6_rgptw"]
 [ext_resource type="Texture2D" uid="uid://ck65xuyy5fe8o" path="res://Assets/16x16_red.png" id="7_o33xq"]
 [ext_resource type="Script" uid="uid://cc11yk2vl6pap" path="res://Scripts/enemy_sprite.gd" id="8_sehdd"]
+[ext_resource type="PackedScene" uid="uid://c7rvdsq4jaxup" path="res://wall.tscn" id="9_4glq7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u6kl"]
 texture = ExtResource("1_ph32v")
@@ -750,3 +751,6 @@ debug_font_size = 10
 position = Vector2(1008, 496)
 texture = ExtResource("7_o33xq")
 script = ExtResource("8_sehdd")
+
+[node name="Wall" parent="." instance=ExtResource("9_4glq7")]
+position = Vector2(464, 400)
