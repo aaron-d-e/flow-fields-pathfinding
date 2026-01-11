@@ -8,4 +8,4 @@ If you want to pull the repo to make changes, just make sure to have Godot 4.5 o
 
 1/10/26: Added obstacle navigation and attempted to add multiple enemies on screen. It works alright, but the enemies group up in a line. This is less than optimal, so I will most likely change that at some point. Anyway, here's the most recent demo.
 
-
+![Image](https://github.com/user-attachments/assets/12acaa0c-cf41-4ffa-9095-3d5560c57c6a)
